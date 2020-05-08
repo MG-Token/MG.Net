@@ -20,10 +20,13 @@
 #### HTTP Methods
 - GET
 - POST
-- PUSH
-- PUT
-- OPTIONS
 - HEAD
+- DELETE
+- PUT
+- CONNECT
+- OPTIONS
+- TRACE
+- PATCH
 
 ## Features
 #### Using
@@ -33,7 +36,7 @@ using MG.Net;
 try
 {
     var hr = new HttpRequest();
-    var res = hr.Get("https://api.ipify.org?format=json");
+    var res = hr.Row(new Uri("https://api.ipify.org?format=json"), HttpMethod.GET);
     if (res.IsOk)
     {
         Console.WriteLine(res.Content);
@@ -53,18 +56,17 @@ catch (HttpException ex)
 var hr = new HttpRequest();
 
 // Get & GetAsync
-var res = hr.Get("https://...")
-var res = await hr.GetAsync("https://...");
+var res = hr.Row(new Uri("https://...."), HttpMethod.GET);
+var res = await hr.RowAsync(new Uri("https://...."), HttpMethod.GET);
 //Or
-var res = hr.Get("https://...", httpContent)
-var res = await hr.GetAsync("https://...", httpContent);
+
+var res = hr.Row(new Uri("https://...."), HttpMethod.GET, Httpcontent);
+var res = await hr.RowAsync(new Uri("https://...."), HttpMethod.GET, Httpcontent);
 
 // Post & Post Async
-var res = hr.Post("https://...");
-var res = hr.Post("https://...", httpContent);
-//Or
-var res = await hr.Post("https://...");
-var res = await hr.Post("https://...", httpContent);
+var res = hr.Row(new Uri("https://...."), HttpMethod.POST, Httpcontent);
+var res = await hr.RowAsync(new Uri("https://...."), HttpMethod.POST, Httpcontent);
+
 ````
 
 #### How to set params
