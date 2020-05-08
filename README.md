@@ -59,13 +59,16 @@ var hr = new HttpRequest();
 var res = hr.Row(new Uri("https://...."), HttpMethod.GET);
 var res = await hr.RowAsync(new Uri("https://...."), HttpMethod.GET);
 //Or
-
 var res = hr.Row(new Uri("https://...."), HttpMethod.GET, Httpcontent);
 var res = await hr.RowAsync(new Uri("https://...."), HttpMethod.GET, Httpcontent);
 
 // Post & Post Async
 var res = hr.Row(new Uri("https://...."), HttpMethod.POST, Httpcontent);
 var res = await hr.RowAsync(new Uri("https://...."), HttpMethod.POST, Httpcontent);
+
+// OPTIONS & OPTIONS Async
+var res = hr.Row(new Uri("https://...."), HttpMethod.OPTIONS);
+var res = await hr.RowAsync(new Uri("https://...."), HttpMethod.OPTIONS);
 
 ````
 
