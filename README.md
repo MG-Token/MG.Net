@@ -17,7 +17,7 @@
 - Digest Authentication
 - Windows NT Challenge/Response authentication (ntlm)
 
-#### HTTP Methods
+#### Methods
 - GET
 - POST
 - HEAD
