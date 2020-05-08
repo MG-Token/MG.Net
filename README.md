@@ -111,7 +111,9 @@ ProxyClient pc = new ProxyClient(ProxyType.Http, "127.0.0.1", 80, "User", "Pass"
 var hr = new HttpRequest()
 {
     UseProxy = true,
-    Proxy = pc
+    Proxy = pc,
+    //Set TimeOut
+    TimeOut = 10000 //MS 
 };
 ````
 
@@ -173,3 +175,11 @@ res.Cookies.TryGetValue("name", out cookie);
 string header;
 res.Headers.TryGetValue("name", out header);
 ````
+#### How To build
+Add 3 DLL to References (This dll in the "bin/Debug"):
+Rebex.Common.dll
+Rebex.Http.dll
+Rebex.Networking.dll
+
+And build it....
+
