@@ -177,6 +177,10 @@ string header = res.GetHeader("name");
 #### Base
 MG.Net Based on Rebex.Net and all of you can use Rebex.Net directly from MG.Net.dll ...
 
+#### Old Code
+this project code is old but releases is up to date
+Why? this project code just uploded to developers see how can use Rebex.Net an easy
+if you like build old code...
 
 # Donate
 **Bitcoin :** 3MCeBtnmSQDvENbsF4BAGs8EqqrYhi9558
