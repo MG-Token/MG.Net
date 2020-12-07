@@ -17,15 +17,13 @@
 - Digest Authentication
 - Windows NT Challenge/Response authentication (ntlm)
 
-#### Methods
+#### HTTP Methods
 - GET
-- POST
 - HEAD
-- DELETE
-- PUT
-- CONNECT
 - OPTIONS
-- TRACE
+- DELETE
+- POST
+- PUT
 - PATCH
 
 ## Features
@@ -36,7 +34,7 @@ using MG.Net;
 try
 {
     var hr = new HttpRequest();
-    var res = hr.Row(new Uri("https://api.ipify.org?format=json"), HttpMethod.GET);
+    var res = hr.Get("https://api.ipify.org?format=json");
     if (res.IsOk)
     {
         Console.WriteLine(res.Content);
@@ -51,75 +49,77 @@ catch (HttpException ex)
     Console.WriteLine(ex.Message);
 }
 ```
-#### How To Request
-````csharp
-var hr = new HttpRequest();
 
-// Get & GetAsync
-var res = hr.Row(new Uri("https://...."), HttpMethod.GET);
-var res = await hr.RowAsync(new Uri("https://...."), HttpMethod.GET);
-//Or
-var res = hr.Row(new Uri("https://...."), HttpMethod.GET, Httpcontent);
-var res = await hr.RowAsync(new Uri("https://...."), HttpMethod.GET, Httpcontent);
-
-// Post & Post Async
-var res = hr.Row(new Uri("https://...."), HttpMethod.POST, Httpcontent);
-var res = await hr.RowAsync(new Uri("https://...."), HttpMethod.POST, Httpcontent);
-
-// OPTIONS & OPTIONS Async
-var res = hr.Row(new Uri("https://...."), HttpMethod.OPTIONS);
-var res = await hr.RowAsync(new Uri("https://...."), HttpMethod.OPTIONS);
-
-````
-
-#### How to set params
+#### How to use StringContent
 ```csharp
-HttpContent content = new HttpContent();
-content.ContentType = "application/x-www-form-urlencoded"; //is default
+StringContent content = new StringContent();
+content.ContentType = "contenttype"; //Default is application/x-www-form-urlencoded
 content["name1"] = "value1";
 content["name2"] = "value2";
 
 //Or
 
-HttpContent content = new HttpContent("{\"name1\":\"value1\",\"name2\":\"value2\"}");
-content.ContentType = "application/json";
+StringContent content = new StringContent("queryparams", "contenttype", encode);
 ```
 
-#### SSL(ON/OFF)
+#### How to use MultipartContent
+```csharp
+MultipartContent content = new MultipartContent(); //Generate random boundary
+//Or
+MultipartContent content = new MultipartContent("boundary");
+
+content.AddParam("name", "value");
+content.AddParam("name", "filename", "contenttype");
+```
+
+#### How to use StreamContent
+```csharp
+StreamContent content = new StreamContent(stream); //Default ContentType is application/x-www-form-urlencoded
+//Or
+StreamContent content = new StreamContent(stream, contentType);
+//Or
+StreamContent content = new StreamContent(stream, contentType, size);
+```
+
+#### Ssl Accept All Certificates(ON/OFF)
 ```csharp
 //ON
 var hr = new HttpRequest()
 {
-    Ssl = true
+    AcceptAllCert = true
 };
 
 //OFF
 var hr = new HttpRequest()
 {
-    Ssl = false
+    AcceptAllCert = false
 };
 ```
 
 #### Set Proxy
 ````csharp
-ProxyClient pc = new ProxyClient(ProxyType.Http, "127.0.0.1:80");
+ProxyClient pc = new ProxyClient(type, "host:port");
 //Or
-ProxyClient pc = new ProxyClient(ProxyType.Http, "127.0.0.1", 80);
+ProxyClient pc = new ProxyClient(type, "host", port);
 //Or
-ProxyClient pc = new ProxyClient(ProxyType.Http, "127.0.0.1", 80, "User", "Pass");
+ProxyClient pc = new ProxyClient(type, "host", port, "user", "pass");
 
 var hr = new HttpRequest()
 {
-    UseProxy = true,
-    Proxy = pc,
-    //Set TimeOut
-    TimeOut = 10000 //MS 
+    Proxy = pc
+};
+
+//Or
+
+var hr = new HttpRequest()
+{
+    Proxy = ProxyClient.Parse(type, "host:port");
 };
 ````
 
 #### Set Proxy Authentication
 ````csharp
-ProxyClient pc = new ProxyClient(ProxyType.Http, "127.0.0.1:80");
+ProxyClient pc = new ProxyClient(type, "host:port");
 
 pc.ProxyAuthentication = ProxyAuthentication.Basic;
 //Or
@@ -166,20 +166,18 @@ hr.Headers.Add("name2", "value2");
 
 #### Get Cookies
 ````csharp
-string cookie;
-res.Cookies.TryGetValue("name", out cookie);
+string cookie = res.GetCookie("name");
 ````
 
 #### Get Header
 ````csharp
-string header;
-res.Headers.TryGetValue("name", out header);
+string header = res.GetHeader("name");
 ````
-#### How To build
-Add 3 DLL to References (This dll in the "bin/Debug"):
-Rebex.Common.dll
-Rebex.Http.dll
-Rebex.Networking.dll
 
-And build it....
+#### Base
+MG.Net Based on Rebex.Net and all of you can use Rebex.Net directly from MG.Net.dll ...
 
+
+# Donate
+**Bitcoin :** 3MCeBtnmSQDvENbsF4BAGs8EqqrYhi9558
+**Tron :** TNjbCfcg2mMokxnbWFkNJJRS8KpFEBxx9X 
