@@ -183,6 +183,4 @@ Why? this project code just uploded to developers see how can use Rebex.Net an e
 if you like build old code...
 
 # Donate
-**Bitcoin :** 3MCeBtnmSQDvENbsF4BAGs8EqqrYhi9558
-
-**Tron :** TNjbCfcg2mMokxnbWFkNJJRS8KpFEBxx9X 
+**Tron or USDT :** TNjbCfcg2mMokxnbWFkNJJRS8KpFEBxx9X 
