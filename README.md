@@ -174,6 +174,18 @@ string cookie = res.GetCookie("name");
 string header = res.GetHeader("name");
 ````
 
+#### New TLS Usage (USE dll's in lib folder)
+````csharp
+ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+ServicePointManager.Expect100Continue = true;
+// register NIST and Brainpool curves
+AsymmetricKeyAlgorithm.Register(EllipticCurveAlgorithm.Create);
+// register Curve25519
+AsymmetricKeyAlgorithm.Register(Curve25519.Create);
+// register Ed25519
+AsymmetricKeyAlgorithm.Register(Ed25519.Create);
+````
+
 #### Base
 MG.Net Based on Rebex.Net and all of you can use Rebex.Net directly from MG.Net.dll ...
 
@@ -181,6 +193,7 @@ MG.Net Based on Rebex.Net and all of you can use Rebex.Net directly from MG.Net.
 this project code is old but releases is up to date
 Why? this project code just uploded to developers see how can use Rebex.Net an easy
 if you like build old code...
+
 
 # Donate
 **Tron or USDT :** TNjbCfcg2mMokxnbWFkNJJRS8KpFEBxx9X 
